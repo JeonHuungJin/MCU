@@ -12,11 +12,14 @@
 #define UART0			0
 #define UART1			1
 
-#define ISR_DISABLE		0
-#define ISR_ENABLE		1
+#define TX_ISR_DISABLE		0
+#define TX_ISR_ENABLE		1
 
-#define SPEED_NORMAL	0
-#define SPEED_DOUBLE	1
+#define RX_ISR_DISABLE		0
+#define RX_ISR_ENABLE		1
+
+#define SPEED_NORMAL		0
+#define SPEED_DOUBLE		1
 
 #define ClearCode		'\f'
 #define NewLineCode		"\n\r"
@@ -52,24 +55,24 @@ enum _DOUBLE_BURR_1{
 };
 
 /* UART Initialization Function
- * uart_num: UART0 or UART1				=> 유아트 포트 선택
- * isr: ISR_DISABLE or ISR_ENABLE		=> 인터럽트 사용 선택
+ * uart_num: UART0 or UART1		=> 유아트 포트 선택
+ * isr: ISR_DISABLE or ISR_ENABLE	=> 인터럽트 사용 선택
  * u2x: SPEED_NORMAL or SPEED_DOUBLE	=> 두배속 모드 사용 선택
  * burr: _NORMAL_BURR or _DOUBLE_BURR_1	=> 보오레이트 설정
  */
-void uart_init(uint8_t uart_num, uint8_t isr, uint8_t u2x ,uint16_t burr);
+void uart_init(uint8_t uart_num, uint8_t rx_isr, uint8_t tx_isr, uint8_t u2x ,uint16_t burr);
 
-uint8_t uart0_rx(FILE *stream);				// receive uart0
+uint8_t uart0_rx(FILE *stream);			// receive uart0
 void uart0_tx(uint8_t data, FILE *stream);	// transmit uart0
-void uart0_tx_str(char *text);				// transmit str uart0
-void uart0_Clear();							// Hyper Terminal Window Clear uart0
-void uart0_NewLine();						// Hyper Terminal New Line uart0
+void uart0_tx_str(char *text);			// transmit str uart0
+void uart0_Clear();				// Hyper Terminal Window Clear uart0
+void uart0_NewLine();				// Hyper Terminal New Line uart0
 
-uint8_t uart1_rx(FILE *stream);				// receive uart1
+uint8_t uart1_rx(FILE *stream);			// receive uart1
 void uart1_tx(uint8_t data, FILE *stream);	// transmit uart1
-void uart1_tx_str(char *text);				// transmit str uart1
-void uart1_Clear();							// Hyper Terminal Window Clear uart1
-void uart1_NewLine();						// Hyper Terminal New Line uart1
+void uart1_tx_str(char *text);			// transmit str uart1
+void uart1_Clear();				// Hyper Terminal Window Clear uart1
+void uart1_NewLine();				// Hyper Terminal New Line uart1
 
 /*
  * 표준 입출력 설정
